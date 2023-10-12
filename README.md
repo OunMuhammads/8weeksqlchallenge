@@ -96,7 +96,8 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ## Question and Solution 
 
-1:- What is the total amount each customer spent at the restaurant?
+
+**1:- What is the total amount each customer spent at the restaurant?**
 
         Select 
         SALES.CUSTOMER_ID, sum(MENU.PRICE) as total_amount
@@ -137,7 +138,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 ***
 
 
-**3. What was the first item from the menu purchased by each customer? **
+**3. What was the first item from the menu purchased by each customer?**
 
         With Orders as (
         Select SALES.CUSTOMER_ID as Customer, Menu.Product_Name as Product, SALES.ORDER_DATE,

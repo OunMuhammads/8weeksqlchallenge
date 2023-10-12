@@ -25,17 +25,18 @@ CREATE TABLE
         Join_date TIMESTAMP
                 );
 
+
 CREATE TABLE menu (
           product_id Number PRIMARY KEY,
           product_name VARCHAR(50),
           price INTEGER
                 );
 
+
 CREATE TABLE Sales (
           customer_id Number,
           order_date TIMESTAMP,
           product_id Number,
-  
           FOREIGN KEY(customer_id) REFERENCES customer (customer_id),
           FOREIGN KEY(product_id) REFERENCES menu(product_id)
                 );
@@ -88,6 +89,7 @@ Insert INTO sales (customer_id, order_date, product_id) VALUES (3, date '2021-01
         group by SALES.CUSTOMER_ID
         order by SALES.CUSTOMER_ID asc; 
 
+
 #### Answer:
 | customer_id | total_amount |
 | ----------- | ------------ |
@@ -97,6 +99,7 @@ Insert INTO sales (customer_id, order_date, product_id) VALUES (3, date '2021-01
 
 
 ***
+
 
 **2. How many days has each customer visited the restaurant?**
 

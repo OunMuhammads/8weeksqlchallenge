@@ -136,6 +136,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ***
 
+
 **3. What was the first item from the menu purchased by each customer? **
 
         With Orders as (

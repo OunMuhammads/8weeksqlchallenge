@@ -120,11 +120,11 @@ Insert INTO sales (customer_id, order_date, product_id) VALUES (3, date '2021-01
 
 **2. How many days has each customer visited the restaurant?**
 
-SELECT 
-  customer_id, 
-  COUNT(DISTINCT order_date) AS visit_count
-  FROM dannys_diner.sales
-  GROUP BY customer_id;
+        SELECT 
+        customer_id, 
+        COUNT(DISTINCT order_date) AS visit_count
+        FROM dannys_diner.sales
+        GROUP BY customer_id;
 
 
 #### Answer:
@@ -138,15 +138,15 @@ SELECT
 
 **3. What was the first item from the menu purchased by each customer? **
 
-With Orders as (
-Select SALES.CUSTOMER_ID as Customer, Menu.Product_Name as Product, SALES.ORDER_DATE,
-DENSE_RANK() OVER (PARTITION BY SALES.CUSTOMER_ID ORDER BY SALES.ORDER_DATE ) as Rank
-from SALES  
-Join Menu
-ON SALES.PRODUCT_ID = MENU.PRODUCT_ID
-)
-Select Customer, Product from Orders
-where Rank = 1;
+        With Orders as (
+        Select SALES.CUSTOMER_ID as Customer, Menu.Product_Name as Product, SALES.ORDER_DATE,
+        DENSE_RANK() OVER (PARTITION BY SALES.CUSTOMER_ID ORDER BY SALES.ORDER_DATE ) as Rank
+        from SALES  
+        Join Menu
+        ON SALES.PRODUCT_ID = MENU.PRODUCT_ID
+        )
+        Select Customer, Product from Orders
+        where Rank = 1;
 
 
 #### Answer:
@@ -162,13 +162,13 @@ where Rank = 1;
 
 **4. What is the most purchased item on the menu and how many times was it purchased by all customers?**
 
-Select count(SALES.PRODUCT_ID) as Most_Sold_Product, Menu.Product_Name 
-from SALES  
-Join Menu
-ON SALES.PRODUCT_ID = MENU.PRODUCT_ID
-group by Menu.Product_Name
-order by Most_Sold_Product desc
-limit 1;
+        Select count(SALES.PRODUCT_ID) as Most_Sold_Product, Menu.Product_Name 
+        from SALES  
+        Join Menu
+        ON SALES.PRODUCT_ID = MENU.PRODUCT_ID
+        group by Menu.Product_Name
+        order by Most_Sold_Product desc
+        limit 1;
 
 
 #### Answer:

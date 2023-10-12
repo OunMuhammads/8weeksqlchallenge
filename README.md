@@ -176,6 +176,65 @@ Danny wants to use the data to answer a few simple questions about his customers
 | ----------- | --------------- |
 | 8           | ramen           |
 
+***
+
+**5. Which item was the most popular for each customer?**
+
+        With Customer_Popular as (
+        Select count(SALES.PRODUCT_ID) as More_Sold_Product, SALES.CUSTOMER_ID as Customer , Menu.Product_Name as Product_Name,
+        DENSE_RANK() OVER (PARTITION BY sales.customer_id ORDER BY COUNT(sales.customer_id) DESC) AS rank
+        from SALES  
+        Join Menu
+        ON SALES.PRODUCT_ID = MENU.PRODUCT_ID
+        group by SALES.CUSTOMER_ID, Menu.Product_Name
+        order by More_Sold_Product desc)
+        
+        Select Customer,Product_Name, More_Sold_Product
+        from Customer_Popular
+        where Rank = 1
+        ;
+
+
+#### Answer:
+| customer_id | product_name | order_count |
+| ----------- | ---------- |------------  |
+| 1           | ramen        |  3   |
+| 1           | Curry        |  3   |
+| 2           | sushi        |  2   |
+| 2           | curry        |  2   |
+| 2           | ramen        |  2   |
+| 3           | ramen        |  3   |
+
+***
+
+**6. Which item was purchased first by the customer after they became a member?**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

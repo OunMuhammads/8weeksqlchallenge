@@ -19,74 +19,74 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ## Table Creations
 
-CREATE TABLE 
-        customer (
-        customer_id Number PRIMARY KEY,
-        Join_date TIMESTAMP
-                );
+        CREATE TABLE 
+                customer (
+                customer_id Number PRIMARY KEY,
+                Join_date TIMESTAMP
+                        );
 
 
-CREATE TABLE menu (
-          product_id Number PRIMARY KEY,
-          product_name VARCHAR(50),
-          price INTEGER
-                );
+        CREATE TABLE menu (
+                  product_id Number PRIMARY KEY,
+                  product_name VARCHAR(50),
+                  price INTEGER
+                        );
 
 
-CREATE TABLE Sales (
-          customer_id Number,
-          order_date TIMESTAMP,
-          product_id Number,
-          FOREIGN KEY(customer_id) REFERENCES customer (customer_id),
-          FOREIGN KEY(product_id) REFERENCES menu(product_id)
-                );
+        CREATE TABLE Sales (
+                  customer_id Number,
+                  order_date TIMESTAMP,
+                  product_id Number,
+                  FOREIGN KEY(customer_id) REFERENCES customer (customer_id),
+                  FOREIGN KEY(product_id) REFERENCES menu(product_id)
+                        );
 
 ## Insert data into the tables
 
 ## Customer Table:
 
-INSERT INTO customer (customer_id, Join_date) VALUES (3, date '2021-01-10');
+        INSERT INTO customer (customer_id, Join_date) VALUES (3, date '2021-01-10');
 
 ## Menu Table
 
-INSERT INTO menu (product_id, product_name, price) VALUES (1, 'Sushi', 10);
-
-INSERT INTO menu (product_id, product_name, price) VALUES (2, 'Curry', 15);
-
-INSERT INTO menu (product_id, product_name, price) VALUES (3, 'Ramen', 12);
+        INSERT INTO menu (product_id, product_name, price) VALUES (1, 'Sushi', 10);
+        
+        INSERT INTO menu (product_id, product_name, price) VALUES (2, 'Curry', 15);
+        
+        INSERT INTO menu (product_id, product_name, price) VALUES (3, 'Ramen', 12);
 
 
 ## Sales Table
 
-Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-01', 1);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-01', 2);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-07', 2);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-10', 3);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES  (1, date '2021-01-11', 3);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES  (1, date '2021-01-11', 3);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-01', 2);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-02', 2);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-04', 1);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-11', 1);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES  (2, date '2021-01-16', 3);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-02-01', 3);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES  (3, date '2021-01-01', 3);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES (3, date '2021-01-01', 3);
-
-Insert INTO sales (customer_id, order_date, product_id) VALUES (3, date '2021-01-07', 3);
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-01', 1);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-01', 2);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-07', 2);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-10', 3);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES  (1, date '2021-01-11', 3);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES  (1, date '2021-01-11', 3);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-01', 2);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-02', 2);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-04', 1);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-11', 1);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES  (2, date '2021-01-16', 3);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-02-01', 3);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES  (3, date '2021-01-01', 3);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (3, date '2021-01-01', 3);
+        
+        Insert INTO sales (customer_id, order_date, product_id) VALUES (3, date '2021-01-07', 3);
 
 ## Entity Relationship Diagram
 

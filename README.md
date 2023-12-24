@@ -64,9 +64,9 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ## Sales Table
 
-           Insert INTO sales 
+	Insert INTO sales 
 		(customer_id, order_date, product_id) 
-	   VALUES 
+	VALUES 
 		(1, date '2021-01-01', 1),
 		(1, date '2021-01-01', 2),
 		(1, date '2021-01-07', 2),

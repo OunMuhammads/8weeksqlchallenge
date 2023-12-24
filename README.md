@@ -64,36 +64,25 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ## Sales Table
 
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-01', 1);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-01', 2);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-07', 2);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (1, date '2021-01-10', 3);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES  (1, date '2021-01-11', 3);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES  (1, date '2021-01-11', 3);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-01', 2);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-02', 2);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-04', 1);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-01-11', 1);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES  (2, date '2021-01-16', 3);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (2, date '2021-02-01', 3);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES  (3, date '2021-01-01', 3);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (3, date '2021-01-01', 3);
-        
-        Insert INTO sales (customer_id, order_date, product_id) VALUES (3, date '2021-01-07', 3);
-
+           Insert INTO sales 
+		(customer_id, order_date, product_id) 
+	   VALUES 
+		(1, date '2021-01-01', 1),
+		(1, date '2021-01-01', 2),
+		(1, date '2021-01-07', 2),
+		(1, date '2021-01-10', 3),
+		(1, date '2021-01-11', 3),
+		(1, date '2021-01-11', 3),
+		(2, date '2021-01-01', 2),
+		(2, date '2021-01-02', 2),
+		(2, date '2021-01-04', 1),
+		(2, date '2021-01-11', 1),
+		(2, date '2021-01-16', 3),
+		(2, date '2021-02-01', 3),
+		(3, date '2021-01-01', 3),
+		(3, date '2021-01-01', 3),
+		(3, date '2021-01-07', 3);
+  
 ## Entity Relationship Diagram
 
 ![image](https://user-images.githubusercontent.com/81607668/127271130-dca9aedd-4ca9-4ed8-b6ec-1e1920dca4a8.png)

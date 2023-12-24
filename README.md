@@ -15,32 +15,32 @@ This case study is based on information from the following link: [here](https://
 Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite. 
 
 ***
-## Please Note: I've used Oracle SQL Developer and I've made changes in the schema.
+## Please Note: I've used mySQL and I've made little changes in the schema.
 
 ## Table Creations
 
         CREATE TABLE 
-                customer (
-                customer_id Number PRIMARY KEY,
-                Join_date TIMESTAMP
-                        );
+            Members (
+            customer_id int PRIMARY KEY,
+            Join_date TIMESTAMP
+                    );
 
 
-        CREATE TABLE menu (
-                  product_id Number PRIMARY KEY,
-                  product_name VARCHAR(50),
-                  price INTEGER
-                        );
+    CREATE TABLE Menu (
+              product_id int PRIMARY KEY,
+              product_name VARCHAR(50),
+              price INTEGER
+                    );
 
 
-        CREATE TABLE Sales (
-                  customer_id Number,
-                  order_date TIMESTAMP,
-                  product_id Number,
-                  FOREIGN KEY(customer_id) REFERENCES customer (customer_id),
-                  FOREIGN KEY(product_id) REFERENCES menu(product_id)
-                        );
-
+    CREATE TABLE Sales (
+              customer_id int,
+              order_date TIMESTAMP,
+              product_id int,
+              FOREIGN KEY(customer_id) REFERENCES members (customer_id),
+              FOREIGN KEY(product_id) REFERENCES menu (product_id)
+                    );
+                    
 ## Insert data into the tables
 
 ## Customer Table:

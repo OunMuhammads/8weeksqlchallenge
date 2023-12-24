@@ -45,21 +45,21 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ## Members Table:
 
-INSERT INTO members
-          (customer_id, join_date)
-VALUES
-          ('1', '2021-01-07'),
-          ('2', '2021-01-09'),
-          ('3', '2021-01-10');
+	INSERT INTO members
+	          (customer_id, join_date)
+	VALUES
+	          ('1', '2021-01-07'),
+	          ('2', '2021-01-09'),
+	          ('3', '2021-01-10');
 
 ## Menu Table
 
-INSERT INTO menu 
-	(product_id, product_name, price) 
-VALUES 
-	(1, 'Sushi', 10),
-	(2, 'Curry', 15),
-	(3, 'Ramen', 12);
+	INSERT INTO menu 
+		(product_id, product_name, price) 
+	VALUES 
+		(1, 'Sushi', 10),
+		(2, 'Curry', 15),
+		(3, 'Ramen', 12);
 
 
 ## Sales Table

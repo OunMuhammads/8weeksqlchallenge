@@ -106,7 +106,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 #### Answer:
 | customer_id | total_amount |
 | ----------- | ------------ |
-| 1           | 91           |
+| 1           | 76           |
 | 2           | 74           |
 | 3           | 36           |
 

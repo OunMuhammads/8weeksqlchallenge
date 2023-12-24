@@ -126,9 +126,9 @@ Danny wants to use the data to answer a few simple questions about his customers
 #### Answer:
 | customer_id | visit_count |
 | ----------- | ----------- |
-| A           | 4          |
-| B           | 6          |
-| C           | 2          |
+| 1           | 4          |
+| 2           | 6          |
+| 3           | 2          |
 
 ***
 

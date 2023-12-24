@@ -43,17 +43,23 @@ Danny wants to use the data to answer a few simple questions about his customers
                     
 ## Insert data into the tables
 
-## Customer Table:
+## Members Table:
 
-        INSERT INTO customer (customer_id, Join_date) VALUES (3, date '2021-01-10');
+INSERT INTO members
+          (customer_id, join_date)
+VALUES
+          ('1', '2021-01-07'),
+          ('2', '2021-01-09'),
+          ('3', '2021-01-10');
 
 ## Menu Table
 
-        INSERT INTO menu (product_id, product_name, price) VALUES (1, 'Sushi', 10);
-        
-        INSERT INTO menu (product_id, product_name, price) VALUES (2, 'Curry', 15);
-        
-        INSERT INTO menu (product_id, product_name, price) VALUES (3, 'Ramen', 12);
+INSERT INTO menu 
+	(product_id, product_name, price) 
+VALUES 
+	(1, 'Sushi', 10),
+	(2, 'Curry', 15),
+	(3, 'Ramen', 12);
 
 
 ## Sales Table

@@ -371,6 +371,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 #### Answer:
 | customer_id | order_date | product_name | price | member |
+| ----------- | ---------- | ------------ | ----- | -----  |
 | 1	      | 2021-01-01 |	sushi	  | 10	  |   N    |
 | 1	      | 2021-01-01 |	curry	  | 15	  |   N    |
 | 1	      | 2021-01-07 |	curry	  | 15	  |   Y    |
@@ -422,6 +423,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 #### Answer:
 | customer_id | order_date | product_name | price | member | ranking |
+| ----------- | ---------- | ------------ | ----- | -----  | ------- |
 | 1	      | 2021-01-01 |	sushi	  | 10	  |   N    | NULL    |
 | 1	      | 2021-01-01 |	curry	  | 15	  |   N    | NULL    |
 | 1	      | 2021-01-07 |	curry	  | 15	  |   Y    | 1       |

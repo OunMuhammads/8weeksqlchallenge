@@ -346,11 +346,98 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ***
 
+##Bonus Questions
+
+#Join All The Things
+
+**Recreate the table with: customer_id, order_date, product_name, price, member (Y/N)**
+
+	SELECT 
+	  sales.customer_id, 
+	  sales.order_date,  
+	  menu.product_name, 
+	  menu.price,
+	  CASE
+	    WHEN members.join_date > sales.order_date THEN 'N'
+	    WHEN members.join_date <= sales.order_date THEN 'Y'
+	    ELSE 'N' END AS member_status
+	FROM dannys_diner.sales
+	LEFT JOIN dannys_diner.members
+	  ON sales.customer_id = members.customer_id
+	INNER JOIN dannys_diner.menu
+	  ON sales.product_id = menu.product_id
+	ORDER BY members.customer_id, sales.order_date
 
 
+#### Answer:
+| customer_id | order_date | product_name | price | member |
+| 1	      | 2021-01-01 |	sushi	  | 10	  |   N    |
+| 1	      | 2021-01-01 |	curry	  | 15	  |   N    |
+| 1	      | 2021-01-07 |	curry	  | 15	  |   Y    |
+| 1	      | 2021-01-10 |	ramen	  | 12	  |   Y    |
+| 1	      | 2021-01-11 |	ramen	  | 12	  |   Y    |
+| 1	      | 2021-01-11 |	ramen	  | 12	  |   Y    |
+| 2	      | 2021-01-01 |	curry	  | 15	  |   N    |
+| 2	      | 2021-01-02 |	curry	  | 15	  |   N    |
+| 2	      | 2021-01-04 |	sushi	  | 10	  |   N    |
+| 2	      | 2021-01-11 |	sushi	  | 10	  |   Y    |
+| 2	      | 2021-01-16 |	ramen	  | 12	  |   Y    |
+| 2	      | 2021-02-01 |	ramen	  | 12	  |   Y    |
+| 3	      | 2021-01-01 |	ramen	  | 12	  |   N    |
+| 3	      | 2021-01-01 |	ramen	  | 12	  |   N    |
+| 3	      | 2021-01-07 |	ramen	  | 12	  |   N    |
 
+***
+#Rank All The Things
 
+#Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
 
+	WITH customers_data AS (
+	  SELECT 
+	    sales.customer_id, 
+	    sales.order_date,  
+	    menu.product_name, 
+	    menu.price,
+	    CASE
+	      WHEN members.join_date > sales.order_date THEN 'N'
+	      WHEN members.join_date <= sales.order_date THEN 'Y'
+	      ELSE 'N' END AS member_status
+	  FROM dannys_diner.sales
+	  LEFT JOIN dannys_diner.members
+	    ON sales.customer_id = members.customer_id
+	  INNER JOIN dannys_diner.menu
+	    ON sales.product_id = menu.product_id
+	)
+	
+	SELECT 
+	  *, 
+	  CASE
+	    WHEN member_status = 'N' then NULL
+	    ELSE RANK () OVER (
+	      PARTITION BY customer_id, member_status
+	      ORDER BY order_date
+	  ) END AS ranking
+	FROM customers_data;
+
+#### Answer:
+| customer_id | order_date | product_name | price | member | ranking |
+| 1	      | 2021-01-01 |	sushi	  | 10	  |   N    | NULL    |
+| 1	      | 2021-01-01 |	curry	  | 15	  |   N    | NULL    |
+| 1	      | 2021-01-07 |	curry	  | 15	  |   Y    | 1       |
+| 1	      | 2021-01-10 |	ramen	  | 12	  |   Y    | 2       |
+| 1	      | 2021-01-11 |	ramen	  | 12	  |   Y    | 3       |
+| 1	      | 2021-01-11 |	ramen	  | 12	  |   Y    | 3       |
+| 2	      | 2021-01-01 |	curry	  | 15	  |   N    | NULL    |
+| 2	      | 2021-01-02 |	curry	  | 15	  |   N    | NULL    |
+| 2	      | 2021-01-04 |	sushi	  | 10	  |   N    | NULL    |
+| 2	      | 2021-01-11 |	sushi	  | 10	  |   Y    | 1       |
+| 2	      | 2021-01-16 |	ramen	  | 12	  |   Y    | 2       |
+| 2	      | 2021-02-01 |	ramen	  | 12	  |   Y    | 3       |
+| 3	      | 2021-01-01 |	ramen	  | 12	  |   N    | NULL    |
+| 3	      | 2021-01-01 |	ramen	  | 12	  |   N    | NULL    |
+| 3	      | 2021-01-07 |	ramen	  | 12	  |   N    | NULL    |
+
+***
 
 
 

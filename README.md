@@ -389,9 +389,9 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ***
 
-##Rank All The Things
+## Rank All The Things
 
-##Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
+## Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
 
 	WITH customers_data AS (
 	  SELECT 

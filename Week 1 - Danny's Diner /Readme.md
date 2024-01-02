@@ -15,7 +15,7 @@ This case study is based on information from the following link: [here](https://
 Danny wants to use the data to answer a few simple questions about his customers, especially about their visiting patterns, how much money they’ve spent and also which menu items are their favourite. 
 
 ***
-## Please Note: I've used mySQL and I've made little changes in the schema.
+## Note: I've made some small tweaks to the database schema. I used MySQL, but feel free to apply the changes using your preferred tool.
 
 ## Table Creations
 

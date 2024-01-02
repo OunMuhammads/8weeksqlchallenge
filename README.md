@@ -346,9 +346,9 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ***
 
-##Bonus Questions
+## Bonus Questions
 
-#Join All The Things
+## Join All The Things
 
 **Recreate the table with: customer_id, order_date, product_name, price, member (Y/N)**
 
@@ -366,7 +366,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 	  ON sales.customer_id = members.customer_id
 	INNER JOIN dannys_diner.menu
 	  ON sales.product_id = menu.product_id
-	ORDER BY members.customer_id, sales.order_date
+	ORDER BY members.customer_id, sales.order_date;
 
 
 #### Answer:
@@ -388,9 +388,10 @@ Danny wants to use the data to answer a few simple questions about his customers
 | 3	      | 2021-01-07 |	ramen	  | 12	  |   N    |
 
 ***
-#Rank All The Things
 
-#Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
+##Rank All The Things
+
+##Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
 
 	WITH customers_data AS (
 	  SELECT 

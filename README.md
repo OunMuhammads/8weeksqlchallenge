@@ -353,20 +353,20 @@ Danny wants to use the data to answer a few simple questions about his customers
 **Recreate the table with: customer_id, order_date, product_name, price, member (Y/N)**
 
 	SELECT 
-	  sales.customer_id, 
-	  sales.order_date,  
-	  menu.product_name, 
-	  menu.price,
+	  s.customer_id, 
+	  s.order_date,  
+	  n.product_name, 
+	  n.price,
 	  CASE
-	    WHEN members.join_date > sales.order_date THEN 'N'
-	    WHEN members.join_date <= sales.order_date THEN 'Y'
+	    WHEN m.join_date > s.order_date THEN 'N'
+	    WHEN m.join_date <= s.order_date THEN 'Y'
 	    ELSE 'N' END AS member_status
-	FROM dannys_diner.sales
-	LEFT JOIN dannys_diner.members
+	FROM sales as s
+	LEFT JOIN members as m
 	  ON sales.customer_id = members.customer_id
-	INNER JOIN dannys_diner.menu
-	  ON sales.product_id = menu.product_id
-	ORDER BY members.customer_id, sales.order_date;
+	INNER JOIN menu as n
+	  ON s.product_id = n.product_id
+	ORDER BY m.customer_id, s.order_date;
 
 
 #### Answer:
@@ -392,23 +392,23 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 ## Rank All The Things
 
-## Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
+**Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.**
 
-	WITH customers_data AS (
+	WITH customers_CTE AS (
 	  SELECT 
-	    sales.customer_id, 
-	    sales.order_date,  
-	    menu.product_name, 
-	    menu.price,
+	    s.customer_id, 
+	    s.order_date,  
+	    n.product_name, 
+	    m.price,
 	    CASE
-	      WHEN members.join_date > sales.order_date THEN 'N'
-	      WHEN members.join_date <= sales.order_date THEN 'Y'
+	      WHEN m.join_date > s.order_date THEN 'N'
+	      WHEN m.join_date <= s.order_date THEN 'Y'
 	      ELSE 'N' END AS member_status
-	  FROM dannys_diner.sales
-	  LEFT JOIN dannys_diner.members
-	    ON sales.customer_id = members.customer_id
-	  INNER JOIN dannys_diner.menu
-	    ON sales.product_id = menu.product_id
+	  FROM sales as s
+	  LEFT JOIN members as m
+	    ON s.customer_id = m.customer_id
+	  INNER JOIN menu as n
+	    ON s.product_id = n.product_id
 	)
 	
 	SELECT 
@@ -419,7 +419,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 	      PARTITION BY customer_id, member_status
 	      ORDER BY order_date
 	  ) END AS ranking
-	FROM customers_data;
+	FROM customers_CTE;
 
 #### Answer:
 | customer_id | order_date | product_name | price | member | ranking |

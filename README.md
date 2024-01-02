@@ -126,9 +126,9 @@ Danny wants to use the data to answer a few simple questions about his customers
 #### Answer:
 | customer_id | visit_count |
 | ----------- | ----------- |
-| 1           | 4          |
-| 2           | 6          |
-| 3           | 2          |
+| 1           | 4           |
+| 2           | 6           |
+| 3           | 2           |
 
 ***
 
@@ -148,7 +148,7 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 #### Answer:
 | customer_id | product_name | 
-| ----------- | ----------- |
+| ----------- | ------------ |
 | 1           | curry        | 
 | 1           | sushi        | 
 | 2           | curry        | 
@@ -170,8 +170,8 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 #### Answer:
 | most_purchased | product_name | 
-| ----------- | --------------- |
-| 8           | ramen           |
+| -------------- | -------------|
+| 8              | ramen        |
 
 ***
 
@@ -194,36 +194,157 @@ Danny wants to use the data to answer a few simple questions about his customers
 
 #### Answer:
 | customer_id | product_name | order_count |
-| ----------- | ---------- |------------  |
-| 1           | ramen        |  3   |
-| 1           | Curry        |  3   |
-| 2           | sushi        |  2   |
-| 2           | curry        |  2   |
-| 2           | ramen        |  2   |
-| 3           | ramen        |  3   |
+| ----------- | ------------ |------------ |
+| 1           | ramen        |  3          |
+| 1           | Curry        |  3          |
+| 2           | sushi        |  2          |
+| 2           | curry        |  2          |
+| 2           | ramen        |  2          |
+| 3           | ramen        |  3          |
 
 ***
 
 **6. Which item was purchased first by the customer after they became a member?**
 
+	With CTE AS (
+		Select s.customer_id, s.order_date, s.Product_id,
+		Row_Number() Over (Partition by customer_id order by order_date) as Row_num
+		from members as m
+		join Sales as s
+		on m.customer_id = s.customer_id
+		where s.order_date > m.join_date
+		    )
+	Select c.customer_id,m.product_name
+	from CTE as c
+	join Menu as m
+	on c.product_id = m.product_id
+	where Row_num = 1
+	order by customer_id asc
+ 	;
 
 
+#### Answer:
+| customer_id | product_name | 
+| ----------- | ------------ |
+| 1           | Ramen        |  
+| 2           | Sushi        |
 
 
+***
+
+**7. Which item was purchased just before the customer became a member?**
+
+	With CTE AS (
+		Select s.customer_id, s.order_date, s.Product_id,
+		Row_Number() Over (Partition by customer_id order by order_date desc) as Row_num
+		from members as m
+		join Sales as s
+		on m.customer_id = s.customer_id
+		where s.order_date < m.join_date
+		    )
+	Select c.customer_id,m.product_name
+	from CTE as c
+	join Menu as m
+	on c.product_id = m.product_id
+	where Row_num = 1
+	order by customer_id asc;
 
 
+#### Answer:
+| customer_id | product_name | 
+| ----------- | ------------ |
+| 1           | Curry        |  
+| 2           | Sushi        |  
+| 3           | Ramen        |
 
 
+***
+
+**8. What is the total items and amount spent for each member before they became a member?**
+
+	Select s.customer_id,  
+	count(s.Product_id) as total_items, 
+	Sum(Price) as total_sales
+	from members as m
+	join Sales as s
+	on m.customer_id = s.customer_id
+	and s.order_date < m.join_date
+	join menu as n
+	on n.product_id = s.product_id
+	group by s.customer_id
+	;
 
 
+#### Answer:
+| customer_id | total_items | total_sales |
+| ----------- | ----------- |------------ |
+| 1           | 2           |  25         |
+| 2           | 3           |  40         |
+| 3           | 3           |  36         |
 
 
+***
 
 
+**9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier - how many points would each customer have?**
+
+	With CTE AS (
+	select product_id,
+	Case when product_id = 1 then price * 20
+	else price * 10 
+	end as points
+	from menu )
+	select customer_id, Sum(points) as total_points
+	from sales as s
+	join cte as c
+	on s.product_id = c.product_id
+	group by customer_id;
 
 
+#### Answer:
+| customer_id | total_points | 
+| ----------- | -----------  |
+| 1           | 860          |
+| 2           | 940          |
+| 3           | 360          |
 
 
+***
+
+**10. In the first week after a customer joins the program (including their join date) they earn 2x points on all items, not just sushi - how many points do customer A and B have at the end of January?**
+
+	WITH dates_cte AS (
+	  SELECT 
+	    customer_id, 
+	    join_date, 
+	    DATE_ADD(join_date, INTERVAL 6 DAY) AS valid_date,
+	    LAST_DAY('2021-01-31'- INTERVAL 1 day) AS last_date
+	FROM members
+	)
+	SELECT 
+	  sales.customer_id, 
+	  SUM(CASE
+	    WHEN menu.product_name = 'sushi' THEN 2 * 10 * menu.price
+	    WHEN sales.order_date BETWEEN dates.join_date AND dates.valid_date THEN 2 * 10 * menu.price
+	    ELSE 10 * menu.price END) AS points
+	FROM sales
+	INNER JOIN dates_cte AS dates
+	  ON sales.customer_id = dates.customer_id
+	  AND dates.join_date <= sales.order_date
+	  AND sales.order_date <= dates.last_date
+	INNER JOIN menu
+	  ON sales.product_id = menu.product_id
+	GROUP BY sales.customer_id;
+
+
+#### Answer:
+| customer_id | points | 
+| ----------- | ------ |
+| 1           | 1020   |
+| 2           | 320    |
+
+
+***
 
 
 

@@ -196,11 +196,10 @@ Danny wants to use the data to answer a few simple questions about his customers
 | customer_id | product_name | order_count |
 | ----------- | ------------ |------------ |
 | 1           | ramen        |  3          |
-| 1           | Curry        |  3          |
+| 3           | ramen        |  3          |
 | 2           | sushi        |  2          |
 | 2           | curry        |  2          |
 | 2           | ramen        |  2          |
-| 3           | ramen        |  3          |
 
 ***
 
